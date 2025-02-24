@@ -23,6 +23,7 @@
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "prettier": "^3.5.2",
+    "syncpack": "^13.0.2",
     "typescript-eslint": "^8.24.1"
   },
   "lint-staged": {
