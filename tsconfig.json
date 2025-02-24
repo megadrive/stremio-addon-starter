@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "incremental": true,
+    "declaration": true,
+    "tsBuildInfoFile": ".tsbuildinfo"
+  },
+  "include": ["packages/**/*.ts"],
+  "exclude": ["node_modules"],
+  "display": "Recommended",
+  "$schema": "https://json.schemastore.org/tsconfig"
+}
