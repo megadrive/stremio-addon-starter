@@ -1,5 +1,5 @@
 {
-  "name": "env",
+  "name": "@stremio-addon/env",
   "version": "0.0.0",
   "description": "",
   "main": "src/index.ts",

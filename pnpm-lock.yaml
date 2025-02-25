@@ -36,23 +36,14 @@ importers:
         specifier: ^8.24.1
         version: 8.24.1(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)
 
-  packages/env:
+  apps/server:
     dependencies:
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
-      envalid:
-        specifier: ^8.0.0
-        version: 8.0.0
-
-  packages/server:
-    dependencies:
+      '@stremio-addon/env':
+        specifier: workspace:*
+        version: link:../../packages/env
       cors:
         specifier: ^2.8.5
         version: 2.8.5
-      env:
-        specifier: 0.0.0
-        version: link:../env
       express:
         specifier: ^4.21.2
         version: 4.21.2
@@ -63,6 +54,21 @@ importers:
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.0
+
+  apps/web:
+    dependencies:
+      '@stremio-addon/env':
+        specifier: workspace:*
+        version: link:../../packages/env
+
+  packages/env:
+    dependencies:
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      envalid:
+        specifier: ^8.0.0
+        version: 8.0.0
 
 packages:
 
