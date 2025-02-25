@@ -14,6 +14,9 @@ importers:
       '@types/node':
         specifier: ^22.13.5
         version: 22.13.5
+      '@types/stremio-addon-sdk':
+        specifier: ^1.6.11
+        version: 1.6.11
       eslint:
         specifier: ^9.21.0
         version: 9.21.0(jiti@2.4.2)
@@ -36,11 +39,20 @@ importers:
         specifier: ^8.24.1
         version: 8.24.1(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)
 
-  apps/server:
+  packages/core:
+    dependencies:
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      envalid:
+        specifier: ^8.0.0
+        version: 8.0.0
+
+  packages/server:
     dependencies:
       '@stremio-addon/core':
         specifier: workspace:*
-        version: link:../../packages/core
+        version: link:../core
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -54,15 +66,6 @@ importers:
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.0
-
-  packages/core:
-    dependencies:
-      dotenv:
-        specifier: ^16.4.7
-        version: 16.4.7
-      envalid:
-        specifier: ^8.0.0
-        version: 8.0.0
 
 packages:
 
@@ -344,6 +347,9 @@ packages:
 
   '@types/serve-static@1.15.7':
     resolution: {integrity: sha512-W8Ym+h8nhuRwaKPaDw34QUkwsGi6Rc4yYqvKFo5rm2FUEhCFbzVWrxXUxuKK8TASjWsysJY0nsmNCGhCOIsrOw==}
+
+  '@types/stremio-addon-sdk@1.6.11':
+    resolution: {integrity: sha512-y0nXwX2gqrWcVYLEvujxqLOm/yZoMu8nLyiw1MthgVuiPp6RVfgWqwpql71MUV5shSfPNsd7EtsiWw2cUFhcWQ==}
 
   '@typescript-eslint/eslint-plugin@8.24.1':
     resolution: {integrity: sha512-ll1StnKtBigWIGqvYDVuDmXJHVH4zLVot1yQ4fJtLpL7qacwkxJc1T0bptqw+miBQ/QfUbhl1TcQ4accW5KUyA==}
@@ -1526,6 +1532,8 @@ snapshots:
       '@types/http-errors': 2.0.4
       '@types/node': 22.13.5
       '@types/send': 0.17.4
+
+  '@types/stremio-addon-sdk@1.6.11': {}
 
   '@typescript-eslint/eslint-plugin@8.24.1(@typescript-eslint/parser@8.24.1(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3))(eslint@9.21.0(jiti@2.4.2))(typescript@5.7.3)':
     dependencies:

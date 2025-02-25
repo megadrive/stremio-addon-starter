@@ -8,3 +8,5 @@ export const serverEnv = cleanEnv(process.env, {
   PORT: num({ default: 3000 }),
   NODE_ENV: str({ default: "development" }),
 });
+
+export const HOST_LOCAL = `http://localhost:${serverEnv.PORT}`;
