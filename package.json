@@ -7,8 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
-    "format": "prettier --write .",
-    "postinstall": "syncpack fix-mismatches"
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
