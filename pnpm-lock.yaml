@@ -38,9 +38,9 @@ importers:
 
   apps/server:
     dependencies:
-      '@stremio-addon/env':
+      '@stremio-addon/core':
         specifier: workspace:*
-        version: link:../../packages/env
+        version: link:../../packages/core
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -55,7 +55,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
 
-  packages/env:
+  packages/core:
     dependencies:
       dotenv:
         specifier: ^16.4.7

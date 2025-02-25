@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "@stremio-addon/env": "workspace:*",
+    "@stremio-addon/core": "workspace:*",
     "express": "^4.21.2"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import env from "@stremio-addon/env";
+import { serverEnv } from "@stremio-addon/core";
 
 const app = express();
 
@@ -10,6 +10,8 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.listen(env.PORT, () => {
-  console.log(`Server listening on port ${env.PORT} in ${env.NODE_ENV} mode`);
+app.listen(serverEnv.PORT, () => {
+  console.log(
+    `Server listening on port ${serverEnv.PORT} in ${serverEnv.NODE_ENV} mode`
+  );
 });
