@@ -10,7 +10,7 @@
     "declaration": true,
     "tsBuildInfoFile": ".tsbuildinfo"
   },
-  "include": ["packages/**/*.ts", "apps/server/src/util/manifest.ts"],
+  "include": ["packages/**/*.ts"],
   "exclude": ["node_modules"],
   "display": "Recommended",
   "$schema": "https://json.schemastore.org/tsconfig"

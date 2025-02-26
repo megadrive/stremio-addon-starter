@@ -4,8 +4,9 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
+    "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
-    "build": "tsc",
+    "build": "pnpm --package=typescript dlx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
