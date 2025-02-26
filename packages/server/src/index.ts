@@ -4,10 +4,12 @@ import { serverEnv } from "@stremio-addon/core";
 import { createManifest } from "./util/manifest";
 import { config } from "@stremio-addon/core";
 import { metaRouter } from "./routes/meta";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 
 const app = express();
-app.use(express.static(join(__dirname, "../../../web/dist")));
+const staticPath = resolve(join(__dirname, "../../web/dist"));
+console.info({ staticPath });
+app.use(express.static(staticPath));
 
 // add support for Cross-Origin Resource Sharing (CORS), necessary for Stremio to access the addon
 app.use(cors());
@@ -15,7 +17,7 @@ app.use(cors());
 const router = Router();
 
 // before every call, decode the config, if present
-router.use("/:config?", (req, res, next) => {
+router.use("/:config?/*", (req, res, next) => {
   const userConfig = req.params.config;
   console.log("userConfig", userConfig);
   if (userConfig) {
@@ -27,7 +29,7 @@ router.use("/:config?", (req, res, next) => {
 });
 
 router.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.redirect("/configure");
 });
 
 router.get("/manifest.json", (req, res) => {

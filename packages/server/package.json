@@ -2,9 +2,9 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "src/index.ts",
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
     "build": "pnpm --package=typescript dlx tsc"
   },
