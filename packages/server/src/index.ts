@@ -8,7 +8,7 @@ import { metaRouter } from "@/routes/meta";
 import { catalogRouter } from "@/routes/catalog";
 
 const app = express();
-const staticPath = resolve(join(__dirname, "../../web/dist"));
+const staticPath = resolve(join(__dirname, "../../web/dist/client"));
 console.info(`Serving static files from Astro: ${staticPath}`);
 app.use(express.static(staticPath));
 

@@ -9,6 +9,8 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@stremio-addon/core": "workspace:*",
+    "@astrojs/node": "^9.1.1",
     "astro": "^5.3.1"
   }
 }

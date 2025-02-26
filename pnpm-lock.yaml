@@ -78,6 +78,12 @@ importers:
 
   packages/web:
     dependencies:
+      '@astrojs/node':
+        specifier: ^9.1.1
+        version: 9.1.1(astro@5.3.1(@types/node@22.13.5)(jiti@2.4.2)(rollup@4.34.8)(tsx@4.19.3)(typescript@5.7.3))
+      '@stremio-addon/core':
+        specifier: workspace:*
+        version: link:../core
       astro:
         specifier: ^5.3.1
         version: 5.3.1(@types/node@22.13.5)(jiti@2.4.2)(rollup@4.34.8)(tsx@4.19.3)(typescript@5.7.3)
@@ -92,6 +98,11 @@ packages:
 
   '@astrojs/markdown-remark@6.1.0':
     resolution: {integrity: sha512-emZNNSTPGgPc3V399Cazpp5+snogjaF04ocOSQn9vy3Kw/eIC4vTQjXOrWDEoSEy+AwPDZX9bQ4wd3bxhpmGgQ==}
+
+  '@astrojs/node@9.1.1':
+    resolution: {integrity: sha512-J7nHModEomtBzxqDR+IVtPKukoSNCv8FtWMk8sXnVXaGNHkqwVwDo1m9ZZi1FZLbCyrP6Ir0iKO4vyngQxiqRA==}
+    peerDependencies:
+      astro: ^5.3.0
 
   '@astrojs/prism@3.2.0':
     resolution: {integrity: sha512-GilTHKGCW6HMq7y3BUv9Ac7GMe/MO9gi9GW62GzKtth0SwukCu/qp2wLiGpEujhY+VVhaG9v7kv/5vFzvf4NYw==}
@@ -2248,9 +2259,16 @@ packages:
     resolution: {integrity: sha512-dW41u5VfLXu8SJh5bwRmyYUbAoSB3c9uQh6L8h/KtsFREPWpbX1lrljJo186Jc4nmci/sGUZ9a0a0J2zgfq2hw==}
     engines: {node: '>= 0.8.0'}
 
+  send@1.1.0:
+    resolution: {integrity: sha512-v67WcEouB5GxbTWL/4NeToqcZiAWEq90N888fczVArY8A79J0L4FD7vj5hm3eUMua5EpoQ59wa/oovY6TLvRUA==}
+    engines: {node: '>= 18'}
+
   serve-static@1.16.2:
     resolution: {integrity: sha512-VqpjJZKadQB/PEbEwvFdO43Ax5dFBZ2UECszz8bQ7pi7wt//PWe1P6MN7eCnjsatYtBT6EuiClbjSWP2WrIoTw==}
     engines: {node: '>= 0.8.0'}
+
+  server-destroy@1.0.1:
+    resolution: {integrity: sha512-rb+9B5YBIEzYcD6x2VKidaa+cqYBJQKnU4oe4E3ANwRRN56yk/ua1YCJT1n21NTS8w6CcOclAKNP3PhdCXKYtQ==}
 
   setprototypeof@1.2.0:
     resolution: {integrity: sha512-E5LDX7Wrp85Kil5bhZv46j8jOeboKq5JMmYM3gVGdGH8xFpPWXUMsNrlODCrkoxMEeNi/XZIwuRvY4XNwYMJpw==}
@@ -2784,6 +2802,15 @@ snapshots:
       unist-util-visit: 5.0.0
       unist-util-visit-parents: 6.0.1
       vfile: 6.0.3
+    transitivePeerDependencies:
+      - supports-color
+
+  '@astrojs/node@9.1.1(astro@5.3.1(@types/node@22.13.5)(jiti@2.4.2)(rollup@4.34.8)(tsx@4.19.3)(typescript@5.7.3))':
+    dependencies:
+      '@astrojs/internal-helpers': 0.5.1
+      astro: 5.3.1(@types/node@22.13.5)(jiti@2.4.2)(rollup@4.34.8)(tsx@4.19.3)(typescript@5.7.3)
+      send: 1.1.0
+      server-destroy: 1.0.1
     transitivePeerDependencies:
       - supports-color
 
@@ -5175,6 +5202,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  send@1.1.0:
+    dependencies:
+      debug: 4.4.0
+      destroy: 1.2.0
+      encodeurl: 2.0.0
+      escape-html: 1.0.3
+      etag: 1.8.1
+      fresh: 0.5.2
+      http-errors: 2.0.0
+      mime-types: 2.1.35
+      ms: 2.1.3
+      on-finished: 2.4.1
+      range-parser: 1.2.1
+      statuses: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
+
   serve-static@1.16.2:
     dependencies:
       encodeurl: 2.0.0
@@ -5183,6 +5227,8 @@ snapshots:
       send: 0.19.0
     transitivePeerDependencies:
       - supports-color
+
+  server-destroy@1.0.1: {}
 
   setprototypeof@1.2.0: {}
 
