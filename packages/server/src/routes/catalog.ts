@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { MetaDetail, MetaPreview } from "stremio-addon-sdk";
+import { MetaDetail } from "stremio-addon-sdk";
 import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
 
 export const catalogRouter: Router = Router();
@@ -7,7 +7,7 @@ export const catalogRouter: Router = Router();
 catalogRouter.get(
   "/:type/:id/:extras.json",
   async (req: Request, res: TypedJsonResponse<{ metas: MetaDetail[] }>) => {
-    const metasExample: MetaDetail[] = [
+    const catalogExample: MetaDetail[] = [
       {
         id: "addonIdPrefix:123456",
         name: "Stremio Addon Example",
@@ -22,6 +22,6 @@ catalogRouter.get(
       },
     ];
 
-    res.json({ metas: metasExample });
+    res.json({ metas: catalogExample });
   }
 );

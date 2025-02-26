@@ -6,6 +6,9 @@ import { createManifest } from "@/util/manifest";
 import { config } from "@stremio-addon/core";
 import { metaRouter } from "@/routes/meta";
 import { catalogRouter } from "@/routes/catalog";
+import { streamRouter } from "./routes/stream";
+import { addonCatalogRouter } from "./routes/addon_catalog";
+import { subtitleRouter } from "./routes/subtitle";
 
 const app = express();
 const staticPath = resolve(join(__dirname, "../../web/dist/client"));
@@ -47,8 +50,11 @@ router.get("/manifest.json", (req, res) => {
 });
 
 // ? Routers are added. You can leave these all as-is, as Stremio will query only the resources and types you specify in the manifest.
-router.use("/meta", metaRouter);
+router.use("/addon_catalog", addonCatalogRouter);
 router.use("/catalog", catalogRouter);
+router.use("/meta", metaRouter);
+router.use("/stream", streamRouter);
+router.use("/subtitle", subtitleRouter);
 
 app.use(router);
 
