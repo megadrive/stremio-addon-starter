@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "pnpm -r --parallel --stream dev",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "lint": "eslint .",
     "format": "prettier --write .",
     "postinstall": "syncpack fix-mismatches",
@@ -31,6 +31,7 @@
     "prettier": "^3.5.2",
     "syncpack": "^13.0.2",
     "tsx": "^4.19.3",
-    "typescript-eslint": "^8.24.1"
+    "typescript-eslint": "^8.24.1",
+    "vitest": "^3.0.7"
   }
 }
