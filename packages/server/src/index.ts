@@ -10,9 +10,11 @@ app.use(cors());
 
 // before every call, decode the config, if present
 app.use("/:config?", (req, res, next) => {
-  const userConfig = req.params.config ?? "";
-  const conf = config.decode(userConfig);
-  res.locals.config = conf;
+  const userConfig = req.params.config;
+  if (userConfig) {
+    const conf = config.decode(userConfig);
+    res.locals.config = conf;
+  }
 
   next();
 });
@@ -22,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/manifest.json", (req, res) => {
-  // in all responses, you can access the config by using res.locals.config
+  // in all responses, you can access the config by using res.locals.config, it will be undefined if not provided
 
   // clone the manifest, modify it as necessary, and send it back
   const manifest = createManifest({

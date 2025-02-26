@@ -1,2 +1,2 @@
 export { serverEnv } from "./env";
-export { config } from "./config";
+export { config, type Config } from "./config";
