@@ -4,6 +4,8 @@ import type { Manifest } from "stremio-addon-sdk";
  * The manifest base of the addon.
  *
  * This gets cloned and modified when a user installs the addon in server.
+ *
+ * ? Change these values to your liking.
  */
 const manifestBase: Manifest = {
   id: "com.github.megadrive.stremio-addon-boilerplate-ts",

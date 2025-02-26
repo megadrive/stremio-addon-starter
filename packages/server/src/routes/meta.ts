@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { MetaDetail } from "stremio-addon-sdk";
-import type { Request, TypedJsonResponse } from "../util/typedJsonResponse";
+import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
 
 export const metaRouter: Router = Router();
 

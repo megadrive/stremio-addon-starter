@@ -1,8 +1,10 @@
 import { z } from "zod";
 
 /**
- * The config schema. Any user-configurable data should be defined here.
- * It gets encoded into a string and provided to the addon as a query parameter.
+ * ? The config schema. Any user-configurable data should be defined here.
+ * ? It gets encoded into a string and provided to the addon as a query parameter.
+ *
+ * If you wanted to add stuff like a debrid apikey, for instance. You would add it here.
  */
 const ConfigSchema = z.object({
   variable1: z.string(),

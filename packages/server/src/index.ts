@@ -1,14 +1,15 @@
+import { join, resolve } from "node:path";
 import express, { Router } from "express";
 import cors from "cors";
 import { serverEnv } from "@stremio-addon/core";
-import { createManifest } from "./util/manifest";
+import { createManifest } from "@/util/manifest";
 import { config } from "@stremio-addon/core";
-import { metaRouter } from "./routes/meta";
-import { join, resolve } from "node:path";
+import { metaRouter } from "@/routes/meta";
+import { catalogRouter } from "@/routes/catalog";
 
 const app = express();
 const staticPath = resolve(join(__dirname, "../../web/dist"));
-console.info({ staticPath });
+console.info(`Serving static files from Astro: ${staticPath}`);
 app.use(express.static(staticPath));
 
 // add support for Cross-Origin Resource Sharing (CORS), necessary for Stremio to access the addon
@@ -45,7 +46,9 @@ router.get("/manifest.json", (req, res) => {
   res.json(manifest);
 });
 
+// ? Routers are added. You can leave these all as-is, as Stremio will query only the resources and types you specify in the manifest.
 router.use("/meta", metaRouter);
+router.use("/catalog", catalogRouter);
 
 app.use(router);
 
