@@ -9,7 +9,6 @@
     "test": "vitest",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "postinstall": "syncpack fix-mismatches",
     "build": "pnpm -r build",
     "start": "pnpm -r start"
   },
