@@ -24,8 +24,12 @@ const router = Router();
 router.use("/:config?/*", (req, res, next) => {
   const userConfig = req.params.config;
   console.log("userConfig", userConfig);
-  if (userConfig) {
+  if (userConfig && userConfig.length > 0) {
     const conf = config.decode(userConfig);
+    if (!conf) {
+      res.status(500).send("Invalid config");
+      return; // exit early
+    }
     res.locals.config = conf;
   }
 
