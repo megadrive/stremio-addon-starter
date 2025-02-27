@@ -33,5 +33,10 @@
     "tsx": "^4.19.3",
     "typescript-eslint": "^8.24.1",
     "vitest": "^3.0.7"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   }
 }
