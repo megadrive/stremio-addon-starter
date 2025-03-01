@@ -5,7 +5,7 @@ import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
 export const catalogRouter: Router = Router();
 
 catalogRouter.get(
-  "/:type/:id/:extras.json",
+  "/*/:type/:id/:extras?.json",
   async (req: Request, res: TypedJsonResponse<{ metas: MetaDetail[] }>) => {
     const catalogExample: MetaDetail[] = [
       {

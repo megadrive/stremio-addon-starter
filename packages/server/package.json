@@ -12,13 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@stremio-addon/core": "workspace:*",
+    "@stremio-addon/config": "workspace:*",
+    "@stremio-addon/env": "workspace:*",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0"
+    "@types/express": "^5.0.0",
+    "express-list-endpoints": "^7.1.1"
   }
 }

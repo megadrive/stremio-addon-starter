@@ -2,10 +2,10 @@ import { Router } from "express";
 import { MetaDetail } from "stremio-addon-sdk";
 import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
 
-export const metaRouter: Router = Router();
-
-metaRouter.get(
-  "/:type/:id.json",
+// should match: /:config/meta/:type/:id/:extras?.json
+// ex: /configexample/meta/movie/123456.json
+export const metaRouter: Router = Router().get(
+  "/:type/:id/:extras?.json",
   async (req: Request, res: TypedJsonResponse<{ meta: MetaDetail }>) => {
     const metaExample: MetaDetail = {
       id: "addonIdPrefix:123456",

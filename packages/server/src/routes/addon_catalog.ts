@@ -5,7 +5,7 @@ import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
 export const addonCatalogRouter: Router = Router();
 
 addonCatalogRouter.get(
-  "/:type/:id/:extras.json",
+  "/:type/:id/:extras?.json",
   async (req: Request, res: TypedJsonResponse<{ addons: AddonCatalog[] }>) => {
     const addonCatalogExample: AddonCatalog[] = [
       {

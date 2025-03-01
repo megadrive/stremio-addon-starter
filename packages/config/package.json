@@ -1,5 +1,5 @@
 {
-  "name": "@stremio-addon/core",
+  "name": "@stremio-addon/config",
   "version": "0.0.0",
   "description": "",
   "main": "src/index.ts",
@@ -11,8 +11,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "envalid": "^8.0.0",
     "zod": "^3.24.2"
   }
 }

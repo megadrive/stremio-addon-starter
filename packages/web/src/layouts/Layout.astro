@@ -1,3 +1,7 @@
+---
+import tailwind from './src/styles/global.css';
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -6,9 +10,10 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>Astro Basics</title>
+		<link rel="stylesheet" href={tailwind} />
 	</head>
 	<body>
-		<slot />
+		<div class="container mx-auto"><slot /></div>
 	</body>
 </html>
 

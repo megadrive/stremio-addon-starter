@@ -1,4 +1,4 @@
-import { serverEnv, HOST_LOCAL } from "@stremio-addon/core";
+import { serverEnv, HOST_LOCAL } from "@stremio-addon/env";
 import type { APIContext } from "astro";
 
 // opt-out of prerendering for this page
