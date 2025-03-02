@@ -39,9 +39,21 @@ app.get("/", (req, res) => {
   res.redirect("/configure");
 });
 
-const router = express.Router();
+// send unmodified manifest for addon sites
+app.get("/manifest.json", (req, res) => {
+  const manifest = createManifest({
+    id: "com.huge",
+    name: "Huge",
+    idPrefixes: ["addonIdPrefix:"],
+  });
 
-router.get("/:config?/manifest.json", parseConfig, (req, res) => {
+  res.json(manifest);
+});
+
+// /:config/*
+const configRouter = express.Router();
+configRouter.use(parseConfig);
+configRouter.get("/manifest.json", (req, res) => {
   /**
    * in all responses, you can access the config by using res.locals.config,
    * it will be undefined if not provided, but a 500 error will be thrown if it is not a valid config
@@ -52,8 +64,8 @@ router.get("/:config?/manifest.json", parseConfig, (req, res) => {
 
   // clone the manifest, modify it as necessary, and send it back
   const manifest = createManifest({
-    id: "com.huge",
-    name: "Huge",
+    id: "com.github.megadrive.stremio-addon-boilerplate-ts-unmodified",
+    name: "Stremio Addon Boilerplate - Unmodified Manifest",
     idPrefixes: ["addonIdPrefix:"],
   });
 
@@ -61,13 +73,13 @@ router.get("/:config?/manifest.json", parseConfig, (req, res) => {
 });
 
 // ? Routers are added. You can leave these all as-is, as Stremio will query only the resources and types you specify in the manifest.
-router.get("/:config?/addon_catalog", parseConfig, addonCatalogRouter);
-router.get("/:config?/catalog", parseConfig, catalogRouter);
-router.get("/:config?/meta/*", parseConfig, metaRouter);
-router.get("/:config?/stream", parseConfig, streamRouter);
-router.get("/:config?/subtitle", parseConfig, subtitleRouter);
+configRouter.get("/addon_catalog", addonCatalogRouter);
+configRouter.get("/catalog", catalogRouter);
+configRouter.get("/meta", metaRouter);
+configRouter.get("/stream", streamRouter);
+configRouter.get("/subtitle", subtitleRouter);
 
-app.use(router);
+app.use("/:config", configRouter);
 
 app.listen(serverEnv.PORT, () => {
   console.log(
