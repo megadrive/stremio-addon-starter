@@ -4,7 +4,7 @@ import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
 
 // should match: /:config/meta/:type/:id/:extras?.json
 // ex: /configexample/meta/movie/123456.json
-export const metaRouter: Router = Router().get(
+export const metaRouter: Router = Router({ mergeParams: true }).get(
   "/:type/:id/:extras?.json",
   async (req: Request, res: TypedJsonResponse<{ meta: MetaDetail }>) => {
     const metaExample: MetaDetail = {
