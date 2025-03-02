@@ -3,7 +3,7 @@ import express, { RequestHandler, Router } from "express";
 import cors from "cors";
 import { serverEnv } from "@stremio-addon/env";
 import { createManifest } from "@/util/manifest";
-import { config } from "@stremio-addon/config";
+import { Config, config } from "@stremio-addon/config";
 import { metaRouter } from "@/routes/meta";
 import { catalogRouter } from "@/routes/catalog";
 import { streamRouter } from "@/routes/stream";
@@ -42,8 +42,8 @@ app.get("/", (req, res) => {
 // send unmodified manifest for addon sites
 app.get("/manifest.json", (req, res) => {
   const manifest = createManifest({
-    id: "com.huge",
-    name: "Huge",
+    id: "com.github.megadrive.stremio-addon-boilerplate-ts-unmodified",
+    name: "Stremio Addon Boilerplate - Unmodified Manifest",
     idPrefixes: ["addonIdPrefix:"],
   });
 
@@ -51,7 +51,7 @@ app.get("/manifest.json", (req, res) => {
 });
 
 // /:config/*
-const configRouter = express.Router();
+const configRouter = express.Router({ mergeParams: true });
 configRouter.use(parseConfig);
 configRouter.get("/manifest.json", (req, res) => {
   /**
@@ -62,10 +62,12 @@ configRouter.get("/manifest.json", (req, res) => {
     `Config: ${res.locals.config ? JSON.stringify(res.locals.config) : "undefined"}`
   );
 
+  const conf = res.locals.config as Config;
+
   // clone the manifest, modify it as necessary, and send it back
   const manifest = createManifest({
-    id: "com.github.megadrive.stremio-addon-boilerplate-ts-unmodified",
-    name: "Stremio Addon Boilerplate - Unmodified Manifest",
+    id: "com.github.megadrive.stremio-addon-boilerplate-ts-parsedConfig",
+    name: `Stremio Addon Boilerplate - Parsed Config Manifest - ${conf.variable1}`,
     idPrefixes: ["addonIdPrefix:"],
   });
 
