@@ -7,7 +7,6 @@ import { config } from "@stremio-addon/config";
 import { metaRouter } from "@/routes/meta";
 import { catalogRouter } from "@/routes/catalog";
 import { streamRouter } from "@/routes/stream";
-import { addonCatalogRouter } from "@/routes/addon_catalog";
 import { subtitleRouter } from "@/routes/subtitle";
 import { manifestRouter } from "./routes/manifest";
 
@@ -62,7 +61,6 @@ configRouter.use(parseConfig);
 // ? Routers are added. You can leave these all as-is, as Stremio will query only the resources and types you specify in the manifest.
 // ? Modify these to your liking. They live in /routes
 configRouter.use("/manifest.json", manifestRouter);
-configRouter.use("/addon_catalog", addonCatalogRouter);
 configRouter.use("/catalog", catalogRouter);
 configRouter.use("/meta", metaRouter);
 configRouter.use("/stream", streamRouter);

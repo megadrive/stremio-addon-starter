@@ -6,7 +6,7 @@ import { addonManifest, createManifest } from "@/util/manifest";
 
 // should match: /:config/manifest.json
 export const manifestRouter: Router = Router({ mergeParams: true }).get(
-  "/:type/:id/:extras?.json",
+  "/",
   async (req: Request, res: TypedJsonResponse<Manifest>) => {
     /**
      * In all responses, you can access the config by using res.locals.config.
