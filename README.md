@@ -6,11 +6,12 @@ The boilerplate is a monorepo, with the following packages:
 
 - `web`: Astro, which serves the configure page
 - `server`: ExpressJS, which is the bulk of the addon
-- `core`: Shared functionality between the two, plus any shared utils
+- `config`: Configuration logic, shared between both packages
+- `env`: Environment variables, shared between both packages. Note that `env` cannot be used client-side.
 
 ## Why use this?
 
-This leverages some really great packages to ensure smooth development and deployment.
+This project leverages some really great packages to ensure smooth development and deployment. It offers a solid starting point for building your own addon, and is easy to extend.
 
 - [Astro](https://astro.build/) for the frontend. One of my favourite frontends, it allows for you to use any existing knowledge of React, Vue, Svelte, etc. to build your frontend.
 - [Express](https://expressjs.com/) for the backend, battle-tested, easy to use, and has a large ecosystem of plugins, if needed.
@@ -27,8 +28,8 @@ This leverages some really great packages to ensure smooth development and deplo
 ### Installation
 
 1. Navigate to a folder where you want to create the project
-2. Run `pnpx tiged github:megadrive/stremio-addon-boilerplate`
-3. Navigate into the folder: `cd stremio-addon-boilerplate`
+2. Run `pnpx tiged github:megadrive/stremio-addon-boilerplate-ts my-new-stremio-addon`
+3. Navigate into the folder: `cd my-new-stremio-addon`
 4. Install dependencies: `pnpm install`
 
 ### Usage notes
