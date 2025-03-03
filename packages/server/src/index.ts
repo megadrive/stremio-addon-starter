@@ -2,14 +2,14 @@ import { join, resolve } from "node:path";
 import express, { RequestHandler } from "express";
 import cors from "cors";
 import { serverEnv } from "@stremio-addon/env";
-import { createManifest } from "@/util/manifest";
-import { Config, config } from "@stremio-addon/config";
+import { addonManifest, createManifest } from "@/util/manifest";
+import { config } from "@stremio-addon/config";
 import { metaRouter } from "@/routes/meta";
 import { catalogRouter } from "@/routes/catalog";
 import { streamRouter } from "@/routes/stream";
 import { addonCatalogRouter } from "@/routes/addon_catalog";
 import { subtitleRouter } from "@/routes/subtitle";
-import expressListEndpoints from "express-list-endpoints";
+import { manifestRouter } from "./routes/manifest";
 
 const app = express();
 const staticPath = resolve(join(__dirname, "../../web/dist/client"));
@@ -40,6 +40,8 @@ const parseConfig: RequestHandler = (req, res, next) => {
   next();
 };
 
+// most addons will not have a landing page, so redirect to /configure
+// if you want to add a landing page, add "index.astro" to the "packages/web/pages" folder
 app.get("/", (_req, res) => {
   res.redirect("/configure");
 });
@@ -47,9 +49,7 @@ app.get("/", (_req, res) => {
 // send unmodified manifest for addon sites
 app.get("/manifest.json", (_req, res) => {
   const manifest = createManifest({
-    id: "com.github.megadrive.stremio-addon-boilerplate-ts-unmodified",
-    name: "Stremio Addon Boilerplate - Unmodified Manifest",
-    idPrefixes: ["addonIdPrefix:"],
+    ...addonManifest,
   });
 
   res.json(manifest);
@@ -58,41 +58,18 @@ app.get("/manifest.json", (_req, res) => {
 // /:config/*
 const configRouter = express.Router({ mergeParams: true });
 configRouter.use(parseConfig);
-configRouter.get("/manifest.json", (req, res) => {
-  /**
-   * in all responses, you can access the config by using res.locals.config,
-   * it will be undefined if not provided, but a 500 error will be thrown if it is not a valid config
-   */
-  console.info(
-    `Config: ${res.locals.config ? JSON.stringify(res.locals.config) : "undefined"}`
-  );
-
-  // TODO: "as Config" is not ideal, but it's the only way to get the type to work at the moment.
-  const conf = res.locals.config as Config;
-
-  // clone the manifest, modify it as necessary, and send it back
-  const manifest = createManifest({
-    id: "com.github.megadrive.stremio-addon-boilerplate-ts-parsedConfig",
-    name: `Stremio Addon Boilerplate - Parsed Config Manifest - ${conf.variable1}`,
-    idPrefixes: ["addonIdPrefix:"],
-  });
-
-  res.setHeader("Content-Type", "application/json");
-  // long-lived cache, as the config won't change
-  res.setHeader("Cache-Control", "public, max-age=31536000");
-  res.json(manifest);
-});
 
 // ? Routers are added. You can leave these all as-is, as Stremio will query only the resources and types you specify in the manifest.
+// ? Modify these to your liking. They live in /routes
+configRouter.use("/manifest.json", manifestRouter);
 configRouter.use("/addon_catalog", addonCatalogRouter);
 configRouter.use("/catalog", catalogRouter);
 configRouter.use("/meta", metaRouter);
 configRouter.use("/stream", streamRouter);
 configRouter.use("/subtitle", subtitleRouter);
 
+// add the /:config/* routes
 app.use("/:config", configRouter);
-
-console.info(expressListEndpoints(configRouter));
 
 app.listen(serverEnv.PORT, () => {
   console.log(

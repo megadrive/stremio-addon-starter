@@ -15,5 +15,5 @@ export const metaRouter: Router = Router({ mergeParams: true }).get(
     };
 
     res.json({ meta: metaExample });
-  },
+  }
 );

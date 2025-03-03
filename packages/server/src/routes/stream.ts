@@ -20,5 +20,5 @@ streamRouter.get(
     ];
 
     res.json({ streams: streamExample });
-  },
+  }
 );

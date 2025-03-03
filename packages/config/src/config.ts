@@ -34,8 +34,9 @@ export const config = {
       const parsed = ConfigSchema.parse(decoded);
 
       return parsed;
-    } catch (e) {
-      console.error("Could not decode config", e);
+    } catch (e: unknown) {
+      // @ts-expect-error Message exists on a parsing error.
+      console.error("Could not decode config", e?.message);
     }
 
     return undefined;

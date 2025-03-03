@@ -25,6 +25,9 @@ export default tseslint.config(
       "**/dist",
       "pnpm-lock.yaml",
       "pnpm-workspace.yaml",
+      "**/.astro",
+      ".syncpackrc.js",
+      "eslint.config.mjs",
     ],
   }
 );
