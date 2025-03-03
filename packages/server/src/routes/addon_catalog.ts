@@ -24,5 +24,5 @@ addonCatalogRouter.get(
     ];
 
     res.json({ addons: addonCatalogExample });
-  }
+  },
 );

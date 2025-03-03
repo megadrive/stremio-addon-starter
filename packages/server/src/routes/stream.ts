@@ -8,6 +8,7 @@ streamRouter.get(
   "/:type/:id.json",
   async (req: Request, res: TypedJsonResponse<{ streams: Stream[] }>) => {
     const { type, id } = req.params;
+    console.log({ type, id });
 
     // Do some logic here to determine what streams to return based on the type and id
 
@@ -19,5 +20,5 @@ streamRouter.get(
     ];
 
     res.json({ streams: streamExample });
-  }
+  },
 );

@@ -16,5 +16,5 @@ subtitleRouter.get(
     ];
 
     res.json({ streams: subtitleExample });
-  }
+  },
 );

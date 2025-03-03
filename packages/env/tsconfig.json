@@ -4,7 +4,7 @@
     "outDir": "dist",
     "paths": { "@/*": ["./src/*"] }
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "../../eslint.config.mjs"],
   "exclude": ["node_modules"],
   "buildOptions": {
     "incremental": true

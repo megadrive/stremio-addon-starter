@@ -23,5 +23,5 @@ catalogRouter.get(
     ];
 
     res.json({ metas: catalogExample });
-  }
+  },
 );

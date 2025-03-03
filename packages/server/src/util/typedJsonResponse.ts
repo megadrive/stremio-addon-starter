@@ -6,7 +6,7 @@ export type { Request } from "express";
  * ? a JSON response which is type-checked by TypeScript to ensure you are returning correct data.
  */
 
-type Send<ResBody = any, T = Response<ResBody>> = (body?: ResBody) => T;
+type Send<ResBody = unknown, T = Response<ResBody>> = (body?: ResBody) => T;
 export interface TypedJsonResponse<T> extends Response<T> {
   json: Send<T, this>;
 }

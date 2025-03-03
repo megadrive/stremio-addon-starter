@@ -3,12 +3,20 @@ import pluginJs from "@eslint/js";
 import tseslint from "typescript-eslint";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  { files: ["**/*.{js,mjs,cjs,ts}"] },
-  { languageOptions: { globals: globals.browser } },
+export default tseslint.config(
+  { files: ["./packages/src/**/*.{js,mjs,cjs,ts}"] },
+  {
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: {
+        project: ["./tsconfig.json", "./packages/*/tsconfig.json"],
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+  eslintPluginPrettierRecommended,
   {
     // Note: there should be no other properties in this object
     ignores: [
@@ -18,6 +26,5 @@ export default [
       "pnpm-lock.yaml",
       "pnpm-workspace.yaml",
     ],
-    eslintPluginPrettierRecommended,
-  },
-];
+  }
+);

@@ -18,7 +18,7 @@ const manifestBase: Manifest = {
 };
 
 export const createManifest = (
-  opts: Pick<Manifest, "id" | "name"> & Partial<Omit<Manifest, "id" | "name">>
+  opts: Pick<Manifest, "id" | "name"> & Partial<Omit<Manifest, "id" | "name">>,
 ): Manifest => {
   return {
     ...manifestBase,
