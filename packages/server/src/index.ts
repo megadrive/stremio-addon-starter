@@ -1,14 +1,14 @@
 import { join, resolve } from "node:path";
-import express, { RequestHandler } from "express";
+import express from "express";
 import cors from "cors";
 import { serverEnv } from "@stremio-addon/env";
 import { addonManifest, createManifest } from "@/util/manifest";
-import { config } from "@stremio-addon/config";
 import { metaRouter } from "@/routes/meta";
 import { catalogRouter } from "@/routes/catalog";
 import { streamRouter } from "@/routes/stream";
 import { subtitleRouter } from "@/routes/subtitle";
-import { manifestRouter } from "./routes/manifest";
+import { manifestRouter } from "@/routes/manifest";
+import { parseConfig } from "@/middleware/parseConfig";
 
 const app = express();
 const staticPath = resolve(join(__dirname, "../../web/dist/client"));
@@ -21,23 +21,6 @@ app.use((req, res, next) => {
   console.info(`[${req.method}] ${req.url}`);
   next();
 });
-
-// before every call, decode the config, if present
-const parseConfig: RequestHandler = (req, res, next) => {
-  const userConfig = req.params.config;
-  console.info(`Parsing config ${userConfig}`);
-  if (userConfig && userConfig.length > 0) {
-    const conf = config.decode(userConfig);
-    res.locals.config = conf;
-
-    if (!conf) {
-      console.error(`Invalid config: ${userConfig}`);
-      res.status(500).send("Invalid config");
-    }
-  }
-
-  next();
-};
 
 // most addons will not have a landing page, so redirect to /configure
 // if you want to add a landing page, add "index.astro" to the "packages/web/pages" folder
