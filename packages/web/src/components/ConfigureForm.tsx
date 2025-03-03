@@ -10,6 +10,9 @@ export default function ConfigureForm() {
     formState: { errors },
   } = useForm<Config>({
     resolver: zodResolver(ConfigSchema),
+    defaultValues: {
+      variable1: "",
+    },
   });
 
   const [configString, setConfigString] = useState<string>();
@@ -33,8 +36,21 @@ export default function ConfigureForm() {
           <button type="submit">Submit</button>
         </div>
       </div>
-      <div className={configString ? "" : "hidden"}>
-        <a href={`/${configString}/manifest.json`}>Install</a>
+      <div className={`${configString ? "" : "hidden"} flex flex-col gap-2`}>
+        <a
+          href={`/${configString}/manifest.json`.replace(/^https?/i, "stremio")}
+        >
+          Install
+        </a>
+        <a
+          href={`https://web.stremio.com/#/addons?addon=${configString}/manifest.json`}
+        ></a>
+        <a
+          href="#"
+          onClick={() => navigator.clipboard.writeText(configString ?? "")}
+        >
+          Copy
+        </a>
       </div>
     </form>
   );
