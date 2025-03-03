@@ -1,5 +1,5 @@
 import { join, resolve } from "node:path";
-import express, { RequestHandler, Router } from "express";
+import express, { RequestHandler } from "express";
 import cors from "cors";
 import { serverEnv } from "@stremio-addon/env";
 import { createManifest } from "@/util/manifest";
@@ -64,7 +64,7 @@ configRouter.get("/manifest.json", (req, res) => {
    * it will be undefined if not provided, but a 500 error will be thrown if it is not a valid config
    */
   console.info(
-    `Config: ${res.locals.config ? JSON.stringify(res.locals.config) : "undefined"}`,
+    `Config: ${res.locals.config ? JSON.stringify(res.locals.config) : "undefined"}`
   );
 
   // TODO: "as Config" is not ideal, but it's the only way to get the type to work at the moment.
@@ -96,6 +96,6 @@ console.info(expressListEndpoints(configRouter));
 
 app.listen(serverEnv.PORT, () => {
   console.log(
-    `Server listening on port ${serverEnv.PORT} in ${serverEnv.NODE_ENV} mode`,
+    `Server listening on port ${serverEnv.PORT} in ${serverEnv.NODE_ENV} mode`
   );
 });
