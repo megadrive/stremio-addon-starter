@@ -9,6 +9,7 @@ import { catalogRouter } from "@/routes/catalog";
 import { streamRouter } from "@/routes/stream";
 import { addonCatalogRouter } from "@/routes/addon_catalog";
 import { subtitleRouter } from "@/routes/subtitle";
+import expressListEndpoints from "express-list-endpoints";
 
 const app = express();
 const staticPath = resolve(join(__dirname, "../../web/dist/client"));
@@ -28,19 +29,23 @@ const parseConfig: RequestHandler = (req, res, next) => {
   console.info(`Parsing config ${userConfig}`);
   if (userConfig && userConfig.length > 0) {
     const conf = config.decode(userConfig);
-    console.info(`Decoded config: ${JSON.stringify(conf)}`);
     res.locals.config = conf;
+
+    if (!conf) {
+      console.error(`Invalid config: ${userConfig}`);
+      res.status(500).send("Invalid config");
+    }
   }
 
   next();
 };
 
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
   res.redirect("/configure");
 });
 
 // send unmodified manifest for addon sites
-app.get("/manifest.json", (req, res) => {
+app.get("/manifest.json", (_req, res) => {
   const manifest = createManifest({
     id: "com.github.megadrive.stremio-addon-boilerplate-ts-unmodified",
     name: "Stremio Addon Boilerplate - Unmodified Manifest",
@@ -62,6 +67,7 @@ configRouter.get("/manifest.json", (req, res) => {
     `Config: ${res.locals.config ? JSON.stringify(res.locals.config) : "undefined"}`
   );
 
+  // TODO: "as Config" is not ideal, but it's the only way to get the type to work at the moment.
   const conf = res.locals.config as Config;
 
   // clone the manifest, modify it as necessary, and send it back
@@ -71,17 +77,22 @@ configRouter.get("/manifest.json", (req, res) => {
     idPrefixes: ["addonIdPrefix:"],
   });
 
+  res.setHeader("Content-Type", "application/json");
+  // long-lived cache, as the config won't change
+  res.setHeader("Cache-Control", "public, max-age=31536000");
   res.json(manifest);
 });
 
 // ? Routers are added. You can leave these all as-is, as Stremio will query only the resources and types you specify in the manifest.
-configRouter.get("/addon_catalog", addonCatalogRouter);
-configRouter.get("/catalog", catalogRouter);
-configRouter.get("/meta", metaRouter);
-configRouter.get("/stream", streamRouter);
-configRouter.get("/subtitle", subtitleRouter);
+configRouter.use("/addon_catalog", addonCatalogRouter);
+configRouter.use("/catalog", catalogRouter);
+configRouter.use("/meta", metaRouter);
+configRouter.use("/stream", streamRouter);
+configRouter.use("/subtitle", subtitleRouter);
 
 app.use("/:config", configRouter);
+
+console.info(expressListEndpoints(configRouter));
 
 app.listen(serverEnv.PORT, () => {
   console.log(
