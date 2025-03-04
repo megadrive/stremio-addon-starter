@@ -6,11 +6,12 @@
   "private": true,
   "scripts": {
     "dev": "pnpm -r --parallel --stream dev",
-    "test": "vitest",
+    "test": "vitest run",
     "lint": "eslint .",
     "format": "prettier ./packages --write .",
     "build": "pnpm -r build",
-    "start": "pnpm -r start"
+    "start": "pnpm -r start",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
@@ -28,6 +29,7 @@
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
     "prettier": "^3.5.2",
     "syncpack": "^13.0.2",
     "tsx": "^4.19.3",
