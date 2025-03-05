@@ -1,4 +1,3 @@
-
 # Web
 
 This is an [Astro](https://astro.build/) project. Please see their docs for more information on how to use it.

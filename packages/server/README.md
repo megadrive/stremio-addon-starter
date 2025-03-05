@@ -10,4 +10,4 @@ Within `/routes/`, there is a file for each resource type. Modify the function w
 
 `/routes/manifest.ts` is where you configure your manifest. This is where you set your "constant" settings, aka your "id", "name", and "version". Possibly a description! In many addons, "types" and "resources" and "catalogs" get modified after being configured.
 
-Note that a config part of the URL is optional when querying the manifest, as 
+Note that a config part of the URL is optional when querying the manifest, as
