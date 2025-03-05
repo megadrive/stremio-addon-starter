@@ -17,6 +17,9 @@ export default defineConfig({
   }),
 
   vite: {
+    server: {
+      cors: true,
+    },
     plugins: [tailwindcss()],
   },
 
