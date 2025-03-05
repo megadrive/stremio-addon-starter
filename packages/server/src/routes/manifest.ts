@@ -30,7 +30,7 @@ export const manifestRouter: Router = Router({ mergeParams: true }).get(
         ...addonManifest,
         name: `${name} - configured with ${conf.variable1}`,
         types: ["movie", "series", "channel"],
-        resources: ["catalog", "catalog", "meta", "stream", "subtitles"],
+        resources: ["catalog", "meta", "stream", "subtitles"],
         catalogs: [
           {
             id: "catalog1",
