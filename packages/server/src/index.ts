@@ -11,6 +11,7 @@ import { manifestRouter } from "@/routes/manifest";
 import { parseConfig } from "@/middleware/parseConfig";
 
 const app = express();
+// the reason this is only serving "client" is because this is the server, and /server is astro's dev server.
 const staticPath = resolve(join(__dirname, "../../web/dist/client"));
 console.info(`Serving static files from Astro: ${staticPath}`);
 app.use(express.static(staticPath));
@@ -25,6 +26,11 @@ app.use((req, res, next) => {
 // most addons will not have a landing page, so redirect to /configure
 // if you want to add a landing page, add "index.astro" to the "packages/web/pages" folder
 app.get("/", (_req, res) => {
+  if (serverEnv.isDevelopment) {
+    res.redirect("http://localhost:4321/configure");
+    return;
+  }
+
   res.redirect("/configure");
 });
 
