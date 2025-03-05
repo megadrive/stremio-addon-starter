@@ -29,6 +29,16 @@ export const manifestRouter: Router = Router({ mergeParams: true }).get(
       manifest = createManifest({
         ...addonManifest,
         name: `${name} - configured with ${conf.variable1}`,
+        types: ["movie", "series", "channel"],
+        resources: ["catalog", "catalog", "meta", "stream", "subtitles"],
+        catalogs: [
+          {
+            id: "catalog1",
+            type: "movie",
+            name: "Movies",
+            extra: [{ name: "genre", options: ["Action", "Comedy"] }],
+          },
+        ],
       });
     }
 
