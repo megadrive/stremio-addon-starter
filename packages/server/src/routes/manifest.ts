@@ -3,6 +3,7 @@ import { Manifest } from "stremio-addon-sdk";
 import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
 import { Config } from "@stremio-addon/config";
 import { addonManifest, createManifest } from "@/util/manifest";
+import { serverEnv } from "@stremio-addon/env";
 
 // should match: /:config/manifest.json
 export const manifestRouter: Router = Router({ mergeParams: true }).get(
@@ -30,6 +31,7 @@ export const manifestRouter: Router = Router({ mergeParams: true }).get(
         ...addonManifest,
         name: `${name} - configured with ${conf.variable1}`,
         types: ["movie", "series", "channel"],
+        logo: `${serverEnv.BASE_URL}/logo.png`,
         resources: ["catalog", "meta", "stream", "subtitles"],
         catalogs: [
           {
