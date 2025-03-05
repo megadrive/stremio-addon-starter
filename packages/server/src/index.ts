@@ -18,7 +18,12 @@ console.info(`Serving static files from Astro: ${staticPath}`);
 app.use(express.static(staticPath));
 
 // add helmet headers. cors is set next on purpose so it overrides the helmet-set headers.
-app.use(helmet());
+app.use(
+  helmet({
+    crossOriginEmbedderPolicy: false,
+    crossOriginOpenerPolicy: false,
+  })
+);
 // add support for Cross-Origin Resource Sharing (CORS), necessary for Stremio to access the addon
 app.use(cors());
 app.use((req, res, next) => {
