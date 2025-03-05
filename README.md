@@ -70,7 +70,7 @@ Read the above "How it works" section first.
 
 `packages/web/src/layouts/Layout.astro` is the main layout that surrounds the `configure.astro`
 
-`packages/web/src/pages/configure.astro` becomes `/configure`. The <h1> is in this file.
+`packages/web/src/pages/configure.astro` becomes `/configure`. The &lt;h1&gt; is in this file.
 
 `packages/web/src/pages/[config]` should be left alone and is only used in development. During dev, these proxy to the addon server, that is running on port 3000 (by default). When building for production, it builds to `dist/server` but can be safely ignored.
 
