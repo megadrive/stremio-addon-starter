@@ -1,6 +1,7 @@
 import { join, resolve } from "node:path";
 import express from "express";
 import cors from "cors";
+import helmet from "helmet";
 import { serverEnv } from "@stremio-addon/env";
 import { addonManifest, createManifest } from "@/util/manifest";
 import { metaRouter } from "@/routes/meta";
@@ -16,6 +17,8 @@ const staticPath = resolve(join(__dirname, "../../web/dist/client"));
 console.info(`Serving static files from Astro: ${staticPath}`);
 app.use(express.static(staticPath));
 
+// add helmet headers. cors is set next on purpose so it overrides the helmet-set headers.
+app.use(helmet());
 // add support for Cross-Origin Resource Sharing (CORS), necessary for Stremio to access the addon
 app.use(cors());
 app.use((req, res, next) => {

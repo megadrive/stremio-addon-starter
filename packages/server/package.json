@@ -16,6 +16,7 @@
     "@stremio-addon/env": "workspace:*",
     "cors": "^2.8.5",
     "express": "^4.21.2",
+    "helmet": "^8.0.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
