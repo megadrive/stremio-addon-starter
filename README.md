@@ -25,6 +25,7 @@ This project leverages some really great packages to ensure smooth development a
 2. Run `pnpx tiged github:megadrive/stremio-addon-boilerplate-ts my-new-stremio-addon`
 3. Navigate into the folder: `cd my-new-stremio-addon`
 4. Install dependencies: `pnpm install`
+5. (optional) Initialise git: `git init && git add . && git commit -m "Initial commit"`
 
 ### Usage notes
 
@@ -66,7 +67,7 @@ Read the above "How it works" section first.
 - React using `@astrojs/react`
 - Tailwind, configured with Vite [following these instructions](https://docs.astro.build/en/guides/styling/#tailwind)
 
-`packages/web/public` are the static assets - generally images, fonts, etc. - that will be used in the frontend and available publically. `logo.png` lives here. Note that the logo - defined in `server/src/routes/manifest.ts` must be an absolute URL and doesn't work 
+`packages/web/public` are the static assets - generally images, fonts, etc. - that will be used in the frontend and available publically. `logo.png` lives here. Note that the logo - defined in `server/src/routes/manifest.ts` must be an absolute URL and doesn't work
 
 `packages/web/src/layouts/Layout.astro` is the main layout that surrounds the `configure.astro`
 
