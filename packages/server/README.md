@@ -4,7 +4,7 @@ This is where the server-side of the addon lives. Whenever Stremio queries your 
 
 ## Usage
 
-The crux of this package is in `/routes` and `/util/manifest.ts`.
+The crux of this package is in `/routes`.
 
 Within `/routes/`, there is a file for each resource type. Modify the function within these files to do what you want your app to do. Stremio hits these endpoints when the user requests a resource of that type, for instance a catalog.
 

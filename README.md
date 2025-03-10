@@ -25,6 +25,7 @@ This project leverages some really great packages to ensure smooth development a
 2. Run `pnpx tiged github:megadrive/stremio-addon-boilerplate-ts my-new-stremio-addon`
 3. Navigate into the folder: `cd my-new-stremio-addon`
 4. Install dependencies: `pnpm install`
+5. (optional) Initialise git: `git init && git add . && git commit -m "Initial commit"`
 
 ### Usage notes
 
