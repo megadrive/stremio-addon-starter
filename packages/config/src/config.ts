@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { compress, decompress } from "shrink-string";
 
 /**
  * ? The config schema. Any user-configurable data should be defined here.
@@ -20,7 +19,7 @@ export const config = {
    */
   decode: async (data: string): Promise<Config | undefined> => {
     try {
-      const decoded = await decompress(data);
+      const decoded = JSON.parse(atob(data));
       const parsed = ConfigSchema.parse(decoded);
 
       return parsed;
@@ -37,6 +36,6 @@ export const config = {
    * @returns Encoded string
    */
   encode: async (data: Config): Promise<string> => {
-    return compress(JSON.stringify(data));
+    return btoa(JSON.stringify(data));
   },
 };
