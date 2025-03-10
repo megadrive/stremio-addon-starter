@@ -66,7 +66,7 @@ Read the above "How it works" section first.
 - React using `@astrojs/react`
 - Tailwind, configured with Vite [following these instructions](https://docs.astro.build/en/guides/styling/#tailwind)
 
-`packages/web/public` are the static assets - generally images, fonts, etc. - that will be used in the frontend and available publically. `logo.png` lives here. Note that the logo - defined in `server/src/routes/manifest.ts` must be an absolute URL and doesn't work 
+`packages/web/public` are the static assets - generally images, fonts, etc. - that will be used in the frontend and available publically. `logo.png` lives here. Note that the logo - defined in `server/src/routes/manifest.ts` must be an absolute URL and doesn't work
 
 `packages/web/src/layouts/Layout.astro` is the main layout that surrounds the `configure.astro`
 

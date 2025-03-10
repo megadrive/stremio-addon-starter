@@ -6,7 +6,6 @@
   "private": true,
   "scripts": {
     "dev": "pnpm -r --parallel --stream dev",
-    "test": "vitest run",
     "lint": "eslint .",
     "format": "prettier ./packages --write .",
     "build": "pnpm -r build",
@@ -33,7 +32,6 @@
     "prettier": "^3.5.2",
     "syncpack": "^13.0.2",
     "tsx": "^4.19.3",
-    "typescript-eslint": "^8.24.1",
-    "vitest": "^3.0.7"
+    "typescript-eslint": "^8.24.1"
   }
 }

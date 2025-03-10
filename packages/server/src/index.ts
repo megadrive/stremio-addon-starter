@@ -42,6 +42,10 @@ app.get("/", (_req, res) => {
   res.redirect("/configure");
 });
 
+app.get("/:config/configure", (req, res) => {
+  res.redirect("/configure#" + req.params.config);
+});
+
 // send unmodified manifest for addon sites
 app.get("/manifest.json", (_req, res) => {
   const manifest = createManifest({
