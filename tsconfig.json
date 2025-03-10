@@ -10,12 +10,7 @@
     "declaration": true,
     "tsBuildInfoFile": ".tsbuildinfo"
   },
-  "include": [
-    ".syncpackrc.js",
-    "eslint.config.mjs",
-    "vitest.config.ts",
-    "packages/**/*.ts"
-  ],
+  "include": [".syncpackrc.js", "eslint.config.mjs", "packages/**/*.ts"],
   "exclude": ["node_modules"],
   "display": "Recommended",
   "$schema": "https://json.schemastore.org/tsconfig"
