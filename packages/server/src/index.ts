@@ -5,6 +5,10 @@ import { manifestRoutes } from "./routes/manifest.js";
 import { addonManifest, createManifest } from "./util/manifest.js";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
+import { metaRouter } from "./routes/meta.js";
+import { catalogRouter } from "./routes/catalog.js";
+import { streamRouter } from "./routes/stream.js";
+import { subtitleRouter } from "./routes/subtitle.js";
 
 const app = new Hono();
 
@@ -12,7 +16,7 @@ app.use(cors());
 app.use(logger());
 
 app.get("/", (c) => {
-  return c.text("Hello Hono!");
+  return c.redirect("/configure");
 });
 
 app.get("/manifest.json", (c) => {
@@ -22,6 +26,10 @@ app.get("/manifest.json", (c) => {
 
 const configRoute = new Hono();
 configRoute.route("/manifest.json", manifestRoutes);
+configRoute.route("/catalog", catalogRouter);
+configRoute.route("/meta", metaRouter);
+configRoute.route("/stream", streamRouter);
+configRoute.route("/subtitle", subtitleRouter);
 
 app.route("/:config", configRoute);
 
