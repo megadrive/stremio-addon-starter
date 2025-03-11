@@ -1,27 +1,18 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/index.ts",
+  "name": "hono",
+  "type": "module",
   "scripts": {
-    "start": "tsx src/index.ts",
-    "dev": "tsx watch src/index.ts",
-    "build": "pnpm --package=typescript dlx tsc"
+    "dev": "tsx watch src/index.ts"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "@hono/node-server": "^1.13.8",
     "@stremio-addon/config": "workspace:*",
     "@stremio-addon/env": "workspace:*",
-    "cors": "^2.8.5",
-    "express": "^4.21.2",
-    "helmet": "^8.0.0",
-    "zod": "^3.24.2"
+    "hono": "^4.7.4"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "express-list-endpoints": "^7.1.1"
+    "@types/node": "^20.11.17",
+    "@types/stremio-addon-sdk": "^1.6.11",
+    "tsx": "^4.7.1"
   }
 }

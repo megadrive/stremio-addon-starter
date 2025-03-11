@@ -1,19 +1,17 @@
-import { Router } from "express";
-import { MetaDetail } from "stremio-addon-sdk";
-import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
+import { Hono } from "hono";
+import { type MetaDetail } from "stremio-addon-sdk";
 
 // should match: /:config/meta/:type/:id/:extras?.json
 // ex: /configexample/meta/movie/123456.json
-export const metaRouter: Router = Router({ mergeParams: true }).get(
-  "/:type/:id.json",
-  async (req: Request, res: TypedJsonResponse<{ meta: MetaDetail }>) => {
-    const metaExample: MetaDetail = {
-      id: "addonIdPrefix:123456",
-      name: "Stremio Addon Example",
-      type: "movie",
-      description: "This is an example meta response.",
-    };
+export const metaRouter = new Hono();
 
-    res.json({ meta: metaExample });
-  }
-);
+metaRouter.get("/:type/:id.json", async (c) => {
+  const metaExample: MetaDetail = {
+    id: "addonIdPrefix:123456",
+    name: "Stremio Addon Example",
+    type: "movie",
+    description: "This is an example meta response.",
+  };
+
+  return c.json({ meta: metaExample });
+});

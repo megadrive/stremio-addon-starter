@@ -1,5 +1,5 @@
 {
-    "files.eol": "\n",
-    "files.trimTrailingWhitespace": true,
-    "files.insertFinalNewline": true
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true
 }

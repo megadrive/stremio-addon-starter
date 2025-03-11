@@ -1,20 +1,16 @@
-import { Router } from "express";
-import { Subtitle } from "stremio-addon-sdk";
-import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
+import { Hono } from "hono";
+import { type Subtitle } from "stremio-addon-sdk";
 
-export const subtitleRouter: Router = Router();
+export const subtitleRouter = new Hono();
 
-subtitleRouter.get(
-  "/:type/:id.json",
-  async (req: Request, res: TypedJsonResponse<{ streams: Subtitle[] }>) => {
-    const subtitleExample: Subtitle[] = [
-      {
-        id: "addonIdPrefix:123456",
-        lang: "en",
-        url: "https://link.to.subtitles.com",
-      },
-    ];
+subtitleRouter.get("/:type/:id.json", async (c) => {
+  const subtitleExample: Subtitle[] = [
+    {
+      id: "addonIdPrefix:123456",
+      lang: "en",
+      url: "https://link.to.subtitles.com",
+    },
+  ];
 
-    res.json({ streams: subtitleExample });
-  }
-);
+  return c.json({ streams: subtitleExample });
+});

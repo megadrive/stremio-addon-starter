@@ -1,52 +1,18 @@
-import { Router } from "express";
-import { Manifest } from "stremio-addon-sdk";
-import type { Request, TypedJsonResponse } from "@/util/typedJsonResponse";
-import { Config } from "@stremio-addon/config";
-import { addonManifest, createManifest } from "@/util/manifest";
+import { Hono } from "hono";
+import { createManifest } from "@/util/manifest.js";
+import { parseConfigFromUrl } from "@/middleware/parseConfigFromUrl.js";
 import { serverEnv } from "@stremio-addon/env";
 
-// should match: /:config/manifest.json
-export const manifestRouter: Router = Router({ mergeParams: true }).get(
-  "/",
-  async (req: Request, res: TypedJsonResponse<Manifest>) => {
-    /**
-     * In all responses, you can access the config by using res.locals.config.
-     *
-     * NOTE: ASIDE FROM `/:config/manifest.json`, if a config is not provided,
-     * the server will return a 500 error as it is required.
-     */
-    console.info(
-      `Config: ${res.locals.config ? JSON.stringify(res.locals.config) : "undefined"}`
-    );
+export const manifestRoutes = new Hono();
 
-    // TODO: "as Config" is not ideal, but it's the only way to get the type to work at the moment.
-    const conf = res.locals.config as Config | undefined;
-    // create a copy of an unmodified manifest
-    let manifest = createManifest(addonManifest);
+manifestRoutes.get("/", parseConfigFromUrl, async (c) => {
+  const config = c.get("config");
 
-    // if we have a configuration, make changes as necessary
-    if (conf) {
-      const { name } = addonManifest;
-      manifest = createManifest({
-        ...addonManifest,
-        name: `${name} - configured with ${conf.variable1}`,
-        types: ["movie", "series", "channel"],
-        logo: `${serverEnv.BASE_URL}/logo.png`,
-        resources: ["catalog", "meta", "stream", "subtitles"],
-        catalogs: [
-          {
-            id: "catalog1",
-            type: "movie",
-            name: "Movies",
-            extra: [{ name: "genre", options: ["Action", "Comedy"] }],
-          },
-        ],
-      });
-    }
+  const manifest = createManifest({
+    id: "com.example.addon",
+    name: `Example Addon with config ${Object.keys(config).join(", ")}`,
+    version: `1.0.0${serverEnv.isDev ? "-dev" : ""}`,
+  });
 
-    res.setHeader("Content-Type", "application/json");
-    // long-lived cache, as the config very likely won't change
-    res.setHeader("Cache-Control", "public, max-age=31536000");
-    res.json(manifest);
-  }
-);
+  return c.json(manifest);
+});

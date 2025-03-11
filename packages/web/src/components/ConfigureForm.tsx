@@ -4,7 +4,7 @@ import { ConfigSchema, type Config, config } from "@stremio-addon/config";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
-function generateInstallLinks(userConfig: Config):
+async function generateInstallLinks(userConfig: Config): Promise<
   | {
       /** encoded config */
       config: string;
@@ -13,11 +13,13 @@ function generateInstallLinks(userConfig: Config):
       /** install link for web */
       web: string;
     }
-  | undefined {
+  | undefined
+> {
   try {
-    const encodedConfig = config.encode(userConfig);
+    const encodedConfig = await config.encode(userConfig);
     // attempt to decode, if we can't then no bueno
-    if (!config.decode(encodedConfig)) {
+    const decoded = await config.decode(encodedConfig);
+    if (!decoded) {
       throw new Error("Invalid config");
     }
 
@@ -57,11 +59,11 @@ export default function ConfigureForm() {
   });
 
   const [configString, setConfigString] =
-    useState<ReturnType<typeof generateInstallLinks>>();
+    useState<Awaited<ReturnType<typeof generateInstallLinks>>>();
 
   // handle form submission
-  const onSubmit = handleSubmit((data) => {
-    const generated = generateInstallLinks(data);
+  const onSubmit = handleSubmit(async (data) => {
+    const generated = await generateInstallLinks(data);
     setConfigString(generated);
   });
 

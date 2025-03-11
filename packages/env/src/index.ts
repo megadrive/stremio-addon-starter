@@ -1,1 +1,1 @@
-export { serverEnv, HOST_LOCAL } from "./env";
+export { serverEnv, HOST_LOCAL } from "./env.js";
