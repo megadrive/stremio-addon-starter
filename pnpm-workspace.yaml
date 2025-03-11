@@ -1,6 +1,5 @@
 packages:
   - packages/config
   - packages/env
-  # - packages/server
+  - packages/server
   - packages/web
-  - packages/hono
