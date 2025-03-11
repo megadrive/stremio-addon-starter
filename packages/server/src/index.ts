@@ -1,12 +1,12 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { serverEnv } from "@stremio-addon/env";
-import { manifestRoutes } from "./routes/manifest.js";
 import { addonManifest, createManifest } from "./util/manifest.js";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
-import { metaRouter } from "./routes/meta.js";
+import { manifestRouter } from "./routes/manifest.js";
 import { catalogRouter } from "./routes/catalog.js";
+import { metaRouter } from "./routes/meta.js";
 import { streamRouter } from "./routes/stream.js";
 import { subtitleRouter } from "./routes/subtitle.js";
 
@@ -25,7 +25,7 @@ app.get("/manifest.json", (c) => {
 });
 
 const configRoute = new Hono();
-configRoute.route("/manifest.json", manifestRoutes);
+configRoute.route("/manifest.json", manifestRouter);
 configRoute.route("/catalog", catalogRouter);
 configRoute.route("/meta", metaRouter);
 configRoute.route("/stream", streamRouter);

@@ -3,9 +3,9 @@ import { createManifest } from "@/util/manifest.js";
 import { parseConfigFromUrl } from "@/middleware/parseConfigFromUrl.js";
 import { serverEnv } from "@stremio-addon/env";
 
-export const manifestRoutes = new Hono();
+export const manifestRouter = new Hono();
 
-manifestRoutes.get("/", parseConfigFromUrl, async (c) => {
+manifestRouter.get("/", parseConfigFromUrl, async (c) => {
   const config = c.get("config");
 
   const manifest = createManifest({
