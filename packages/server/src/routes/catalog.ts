@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { type MetaDetail } from "stremio-addon-sdk";
+import type { MetaDetail } from "stremio-addon-sdk";
 import { parseExtras } from "@/util/parseExtras.js";
 
 export const catalogRouter = new Hono();

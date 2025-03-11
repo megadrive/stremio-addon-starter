@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { type Subtitle } from "stremio-addon-sdk";
+import type { Subtitle } from "stremio-addon-sdk";
 
 export const subtitleRouter = new Hono();
 

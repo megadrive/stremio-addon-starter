@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { type Stream } from "stremio-addon-sdk";
+import type { Stream } from "stremio-addon-sdk";
 
 export const streamRouter = new Hono();
 
