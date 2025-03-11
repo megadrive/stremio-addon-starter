@@ -1,5 +1,5 @@
 {
-  "name": "hono",
+  "name": "@stremio-addon/server",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/index.ts"
