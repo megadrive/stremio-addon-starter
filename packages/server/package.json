@@ -11,8 +11,8 @@
     "hono": "^4.7.4"
   },
   "devDependencies": {
-    "@types/node": "^20.11.17",
+    "@types/node": "^22.13.5",
     "@types/stremio-addon-sdk": "^1.6.11",
-    "tsx": "^4.7.1"
+    "tsx": "^4.19.3"
   }
 }
