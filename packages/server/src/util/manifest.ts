@@ -4,12 +4,14 @@ import type { Manifest } from "stremio-addon-sdk";
  * The manifest base of the addon.
  *
  * This gets cloned and modified when a user installs the addon in server.
+ *
+ * ! You do not have to edit anything in this object.
  */
 const manifestBase: Manifest = {
-  id: "com.github.megadrive.stremio-addon-boilerplate-ts",
-  name: "Stremio Addon Boilerplate",
-  description: "A boilerplate for making Stremio Addons in TypeScript",
-  version: "0.0.0",
+  id: "",
+  name: "",
+  description: "",
+  version: "",
   catalogs: [],
   resources: ["meta"],
   types: ["movie", "series"],
@@ -29,13 +31,13 @@ export const createManifest = (
 };
 
 /**
- * Addon configuration
+ * ? Addon configuration
+ *
  * This is where you can give your addon an id, display name, etc. Essentially anything that will not change when the addon is updated.
  * You can do cool things like dynamically create catalogs, or request certain resources. You do that in the line marked: @configurable-manifest
  */
 export const addonManifest = createManifest({
   id: "org.your.addon.id",
-  name: "Stremio Addon Boilerplate",
+  name: "Stremio Addon Starter",
   version: "0.0.0",
-  description: "A boilerplate for making Stremio Addons in TypeScript",
 });

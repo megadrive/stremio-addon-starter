@@ -5,6 +5,8 @@ import { z } from "zod";
  * ? It gets encoded into a string and provided to the addon as a query parameter.
  *
  * If you wanted to add stuff like a debrid apikey, for instance. You would add it here.
+ *
+ * @configuration
  */
 export const ConfigSchema = z.object({
   variable1: z.string().min(1, { message: "Variable 1 is required" }),

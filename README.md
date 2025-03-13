@@ -1,6 +1,6 @@
-# Stremio Addon Boilerplate
+# Stremio Addon Starter
 
-This is a boilerplate for creating Stremio Addons using TypeScript, Astro and Express. Hopefully this is a good starting point for your own addon.
+This is a starter template for creating Stremio Addons using TypeScript, Astro and Express. Hopefully this is a good starting point for your own addon.
 
 ## Why use this?
 
