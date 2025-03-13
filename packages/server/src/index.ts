@@ -9,6 +9,9 @@ import { catalogRouter } from "./routes/catalog.js";
 import { metaRouter } from "./routes/meta.js";
 import { streamRouter } from "./routes/stream.js";
 import { subtitleRouter } from "./routes/subtitle.js";
+import { serveStatic } from "hono/serve-static";
+import path from "node:path";
+import { readFile } from "node:fs/promises";
 
 const app = new Hono();
 
@@ -32,6 +35,19 @@ configRoute.route("/stream", streamRouter);
 configRoute.route("/subtitle", subtitleRouter);
 
 app.route("/:config", configRoute);
+
+app.use(
+  "*",
+  serveStatic({
+    root: "../web/dist/client",
+    pathResolve(filePath) {
+      return path.resolve(".", filePath);
+    },
+    getContent(path) {
+      return readFile(path);
+    },
+  })
+);
 
 serve(
   {
