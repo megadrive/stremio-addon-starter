@@ -9,13 +9,16 @@ import { subtitleRouter } from "@/routes/config/subtitle.js";
 import { serveStatic } from "hono/serve-static";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
-import { createApp, createRouter } from "@/util/createHono.js";
+import { createAPIRouter, createApp, createRouter } from "@/util/createHono.js";
+import { exampleAPIRouter } from "@/routes/api/example.js";
 
 const app = createApp();
 
-app.get("/", (c) => {
-  return c.redirect("/configure");
-});
+if (serverEnv.isProduction) {
+  app.get("/", (c) => {
+    return c.redirect("/configure");
+  });
+}
 
 app.get("/manifest.json", (c) => {
   const manifest = createManifest({ ...addonManifest });
@@ -30,6 +33,10 @@ configRouter.route("/stream", streamRouter);
 configRouter.route("/subtitle", subtitleRouter);
 
 app.route("/:config", configRouter);
+
+const apiRouter = createAPIRouter();
+apiRouter.route("/example", exampleAPIRouter);
+app.route("/api", apiRouter);
 
 app.use(
   "*",

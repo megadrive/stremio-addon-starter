@@ -27,6 +27,16 @@ export function createApp() {
     .notFound(notFound);
 }
 
+/**
+ * Create an API router
+ */
+export function createAPIRouter() {
+  return new Hono<AppBindings>({ strict: false });
+}
+
+/**
+ * Create a router with config /.+/(route)
+ */
 export function createRouter() {
   return new Hono<AppBindingsWithConfig>({ strict: false }).use(
     parseConfigFromUrl
