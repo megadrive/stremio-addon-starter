@@ -22,14 +22,14 @@ app.get("/manifest.json", (c) => {
   return c.json(manifest);
 });
 
-const configRoute = createRouter();
-configRoute.route("/manifest.json", manifestRouter);
-configRoute.route("/catalog", catalogRouter);
-configRoute.route("/meta", metaRouter);
-configRoute.route("/stream", streamRouter);
-configRoute.route("/subtitle", subtitleRouter);
+const configRouter = createRouter();
+configRouter.route("/manifest.json", manifestRouter);
+configRouter.route("/catalog", catalogRouter);
+configRouter.route("/meta", metaRouter);
+configRouter.route("/stream", streamRouter);
+configRouter.route("/subtitle", subtitleRouter);
 
-app.route("/:config", configRoute);
+app.route("/:config", configRouter);
 
 app.use(
   "*",
