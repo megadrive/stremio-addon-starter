@@ -6,20 +6,20 @@ import type { PinoLogger } from "hono-pino";
 import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares";
 import { parseConfigFromUrl } from "@/middleware/parseConfigFromUrl.js";
 
-type Bindings = {
+type AppBindings = {
   Variables: {
     logger: PinoLogger;
   };
 };
 
-type BindingsWithConfig = Bindings & {
+export type AppBindingsWithConfig = AppBindings & {
   Variables: {
     config: Config;
   };
 };
 
 export function createApp() {
-  return new Hono<Bindings>({ strict: false })
+  return new Hono<AppBindings>({ strict: false })
     .use(serveEmojiFavicon("📺"))
     .use(pinoLoggerMiddleware())
     .use(cors())
@@ -28,7 +28,7 @@ export function createApp() {
 }
 
 export function createRouter() {
-  return new Hono<BindingsWithConfig>({ strict: false }).use(
+  return new Hono<AppBindingsWithConfig>({ strict: false }).use(
     parseConfigFromUrl
   );
 }
