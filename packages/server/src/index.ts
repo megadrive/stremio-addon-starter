@@ -1,15 +1,15 @@
 import { serve } from "@hono/node-server";
 import { serverEnv } from "@stremio-addon/env";
-import { addonManifest, createManifest } from "./util/manifest.js";
-import { manifestRouter } from "./routes/config/manifest.js";
-import { catalogRouter } from "./routes/config/catalog.js";
-import { metaRouter } from "./routes/config/meta.js";
-import { streamRouter } from "./routes/config/stream.js";
-import { subtitleRouter } from "./routes/config/subtitle.js";
+import { addonManifest, createManifest } from "@/util/manifest.js";
+import { manifestRouter } from "@/routes/config/manifest.js";
+import { catalogRouter } from "@/routes/config/catalog.js";
+import { metaRouter } from "@/routes/config/meta.js";
+import { streamRouter } from "@/routes/config/stream.js";
+import { subtitleRouter } from "@/routes/config/subtitle.js";
 import { serveStatic } from "hono/serve-static";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
-import { createApp, createRouter } from "./util/createHono.js";
+import { createApp, createRouter } from "@/util/createHono.js";
 
 const app = createApp();
 
