@@ -1,10 +1,11 @@
-import { Hono } from "hono";
+import { createRouter } from "@/util/createHono.js";
 import type { MetaDetail } from "stremio-addon-sdk";
 import { parseExtras } from "@/util/parseExtras.js";
+import { parseConfigFromUrl } from "@/middleware/parseConfigFromUrl.js";
 
-export const catalogRouter = new Hono();
+export const catalogRouter = createRouter();
 
-catalogRouter.get("/:type/:id/:extras?.json", async (c) => {
+catalogRouter.get("/:type/:id/:extras?.json", parseConfigFromUrl, async (c) => {
   const type = c.req.param("type");
   const id = c.req.param("id");
   const extras = c.req.param("extras");

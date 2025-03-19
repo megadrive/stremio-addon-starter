@@ -1,22 +1,17 @@
 import { serve } from "@hono/node-server";
-import { Hono } from "hono";
 import { serverEnv } from "@stremio-addon/env";
 import { addonManifest, createManifest } from "./util/manifest.js";
-import { cors } from "hono/cors";
-import { logger } from "hono/logger";
-import { manifestRouter } from "./routes/manifest.js";
-import { catalogRouter } from "./routes/catalog.js";
-import { metaRouter } from "./routes/meta.js";
-import { streamRouter } from "./routes/stream.js";
-import { subtitleRouter } from "./routes/subtitle.js";
+import { manifestRouter } from "./routes/config/manifest.js";
+import { catalogRouter } from "./routes/config/catalog.js";
+import { metaRouter } from "./routes/config/meta.js";
+import { streamRouter } from "./routes/config/stream.js";
+import { subtitleRouter } from "./routes/config/subtitle.js";
 import { serveStatic } from "hono/serve-static";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
+import { createApp, createRouter } from "./util/createHono.js";
 
-const app = new Hono();
-
-app.use(cors());
-app.use(logger());
+const app = createApp();
 
 app.get("/", (c) => {
   return c.redirect("/configure");
@@ -27,7 +22,7 @@ app.get("/manifest.json", (c) => {
   return c.json(manifest);
 });
 
-const configRoute = new Hono();
+const configRoute = createRouter();
 configRoute.route("/manifest.json", manifestRouter);
 configRoute.route("/catalog", catalogRouter);
 configRoute.route("/meta", metaRouter);

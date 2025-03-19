@@ -1,9 +1,9 @@
-import { Hono } from "hono";
+import { createRouter } from "@/util/createHono.js";
 import { createManifest } from "@/util/manifest.js";
 import { parseConfigFromUrl } from "@/middleware/parseConfigFromUrl.js";
 import { serverEnv } from "@stremio-addon/env";
 
-export const manifestRouter = new Hono();
+export const manifestRouter = createRouter();
 
 /**
  * This endpoint gets your user's configuration and is considered the "final" manifest, configured by the user.

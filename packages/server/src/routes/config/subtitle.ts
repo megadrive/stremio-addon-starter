@@ -1,7 +1,7 @@
-import { Hono } from "hono";
+import { createRouter } from "@/util/createHono.js";
 import type { Subtitle } from "stremio-addon-sdk";
 
-export const subtitleRouter = new Hono();
+export const subtitleRouter = createRouter();
 
 subtitleRouter.get("/:type/:id.json", async (c) => {
   const subtitleExample: Subtitle[] = [
