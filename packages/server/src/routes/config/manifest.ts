@@ -1,6 +1,5 @@
 import { createRouter } from "@/util/createHono.js";
 import { createManifest } from "@/util/manifest.js";
-import { parseConfigFromUrl } from "@/middleware/parseConfigFromUrl.js";
 import { serverEnv } from "@stremio-addon/env";
 
 export const manifestRouter = createRouter();
@@ -14,12 +13,13 @@ export const manifestRouter = createRouter();
  * @configurable-manifest
  * Search: @configuration in packages/config to change the configuration.
  */
-manifestRouter.get("/", parseConfigFromUrl, async (c) => {
-  const config = c.get("config");
+manifestRouter.get("/", async (c) => {
+  const config = c.var.config;
 
   const manifest = createManifest({
     id: "com.example.addon",
-    name: `Example Addon with config ${Object.keys(config).join(", ")}`,
+    name: "Example Addon with config",
+    description: `Configured values: ${Object.keys(config).join(", ")}`,
     version: `1.0.0${serverEnv.isDev ? "-dev" : ""}`,
   });
 

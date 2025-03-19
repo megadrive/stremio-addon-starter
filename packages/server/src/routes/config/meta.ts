@@ -1,4 +1,3 @@
-import { parseConfigFromUrl } from "@/middleware/parseConfigFromUrl.js";
 import { createRouter } from "@/util/createHono.js";
 import type { MetaDetail } from "stremio-addon-sdk";
 
@@ -6,7 +5,7 @@ import type { MetaDetail } from "stremio-addon-sdk";
 // ex: /configexample/meta/movie/123456.json
 export const metaRouter = createRouter();
 
-metaRouter.get("/:type/:id.json", parseConfigFromUrl, async (c) => {
+metaRouter.get("/:type/:id.json", async (c) => {
   const metaExample: MetaDetail = {
     id: "addonIdPrefix:123456",
     name: "Stremio Addon Example",
