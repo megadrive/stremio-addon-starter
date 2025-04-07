@@ -11,15 +11,21 @@ class ConfigError extends Error {
   }
 }
 
+/**
+ * Middleware to parse the config from the URL and set it in the context.
+ */
 export const parseConfigFromUrl = createMiddleware<AppBindingsWithConfig>(
   async (c, next) => {
     const configString = c.req.param("config");
 
     try {
-      if (configString) {
+      // Check if the request is not an API request and if the config string is present
+      if (!c.req.routePath.startsWith("/api") && configString) {
         const conf = await config.decode(configString);
         if (!conf) throw new ConfigError("Invalid config");
         c.set("config", conf);
+        /** Useful for comparisons */
+        c.set("configString", configString);
       }
     } catch (error) {
       if (error instanceof Error) {

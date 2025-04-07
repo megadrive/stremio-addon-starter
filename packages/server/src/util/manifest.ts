@@ -13,17 +13,15 @@ const manifestBase: Manifest = {
   description: "",
   version: "",
   catalogs: [],
-  resources: ["meta"],
-  types: ["movie", "series"],
+  resources: [],
+  types: [],
 };
 
 /**
  * Create a new manifest.
  * NOTE: Remember that each "call" to your addon runs in isolation. There is no "app state" aside from the config sent in the URL.
  */
-export const createManifest = (
-  opts: Pick<Manifest, "id" | "name"> & Partial<Omit<Manifest, "id" | "name">>
-): Manifest => {
+export const createManifest = (opts: Partial<Manifest>): Manifest => {
   return {
     ...manifestBase,
     ...opts,
@@ -31,7 +29,7 @@ export const createManifest = (
 };
 
 /**
- * ? Addon configuration
+ * ? Default addon configuration
  *
  * This is where you can give your addon an id, display name, etc. Essentially anything that will not change when the addon is updated.
  * You can do cool things like dynamically create catalogs, or request certain resources. You do that in the line marked: @configurable-manifest
