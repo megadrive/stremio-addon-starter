@@ -7,12 +7,16 @@ export const catalogRouter = createRouter();
 catalogRouter.get("/:type/:id/:extras?.json", async (c) => {
   const type = c.req.param("type");
   const id = c.req.param("id");
-  const extras = c.req.param("extras");
+  const extras = c.req.param("extras.json")?.replace(/\.json$/, "") ?? "";
 
+  // Parse the extra parameters. You define these in the manifest, for stuff such as "genre", "skip" and "search"
   const parsedExtras = parseExtras(extras);
-  console.info(`[${type}] ${id} with extras: ${JSON.stringify(parsedExtras)}`);
+  c.var.logger.info(
+    `[${type}] ${id} with extras: ${JSON.stringify(parsedExtras)}`
+  );
 
-  const catalogExample: MetaDetail[] = [
+  // A catalog is just an array of `MetaDetail` or `MetaPreview` objects.
+  const catalog: MetaDetail[] = [
     {
       id: "addonIdPrefix:123456",
       name: "Stremio Addon Example",
@@ -27,5 +31,5 @@ catalogRouter.get("/:type/:id/:extras?.json", async (c) => {
     },
   ];
 
-  return c.json({ metas: catalogExample });
+  return c.json({ metas: catalog });
 });

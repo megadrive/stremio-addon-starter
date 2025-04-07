@@ -14,12 +14,14 @@ metaRouter.get("/:type/:id.json", async (c) => {
 
   const contentType = ContentTypeSchema.parse(type);
 
-  const metaExample: MetaDetail = {
+  c.var.logger.info(`Finding meta for ${contentType} with id ${id}`);
+
+  const meta: MetaDetail = {
     id: "addonIdPrefix:123456",
     name: "Stremio Addon Example",
     type: contentType,
     description: "This is an example meta response.",
   };
 
-  return c.json({ meta: metaExample });
+  return c.json({ meta });
 });
