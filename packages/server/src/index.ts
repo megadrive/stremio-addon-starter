@@ -15,7 +15,7 @@ const app = createApp();
 app.use(
   "*",
   serveStatic({
-    root: "../web/dist/client",
+    root: "../frontend/dist/client",
   })
 );
 
@@ -25,11 +25,18 @@ if (serverEnv.isProduction) {
   });
 }
 
+// The default manifest.
 app.get("/manifest.json", (c) => {
   const manifest = createManifest({ ...addonManifest });
   return c.json(manifest);
 });
 
+// API routes, they need to be above the config routes since :config routes are a catch-all
+const apiRouter = createAPIRouter();
+apiRouter.route("/example", exampleAPIRouter);
+app.route("/api", apiRouter);
+
+// anything that is not /api or /manifest.json will be treated as a config route, must be last in your routes
 const configRouter = createRouter();
 configRouter.route("/manifest.json", manifestRouter);
 configRouter.route("/catalog", catalogRouter);
@@ -38,10 +45,6 @@ configRouter.route("/stream", streamRouter);
 configRouter.route("/subtitle", subtitleRouter);
 
 app.route("/:config", configRouter);
-
-const apiRouter = createAPIRouter();
-apiRouter.route("/example", exampleAPIRouter);
-app.route("/api", apiRouter);
 
 serve(
   {
