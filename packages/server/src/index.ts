@@ -9,6 +9,7 @@ import { subtitleRouter } from "@/routes/config/subtitle.js";
 import { serveStatic } from "@hono/node-server/serve-static";
 import { createAPIRouter, createApp, createRouter } from "@/util/createHono.js";
 import { exampleAPIRouter } from "@/routes/api/example.js";
+import { emojiAPIRouter } from "./routes/api/emoji.js";
 
 const app = createApp();
 
@@ -34,6 +35,7 @@ app.get("/manifest.json", (c) => {
 // API routes, they need to be above the config routes since :config routes are a catch-all
 const apiRouter = createAPIRouter();
 apiRouter.route("/example", exampleAPIRouter);
+apiRouter.route("/emoji", emojiAPIRouter);
 app.route("/api", apiRouter);
 
 // anything that is not /api or /manifest.json will be treated as a config route, must be last in your routes
